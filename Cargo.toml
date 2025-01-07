@@ -1,5 +1,5 @@
 [package]
-name = "aga8eos"
+name = "pyaga8"
 version = "0.1.0"
 edition = "2021"
 
