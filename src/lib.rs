@@ -42,7 +42,7 @@ impl Gerg2008 {
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn aga8eos(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn pyaga8(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Gerg2008>()?;
     Ok(())
 }
