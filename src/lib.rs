@@ -28,15 +28,20 @@ impl Gerg2008 {
     }
 
     #[setter]
-    fn set_temperature(&mut self, tempreature: f64) -> PyResult<()> {
-        println!("{}", tempreature);
-        self.inner.t = tempreature;
+    fn set_temperature(&mut self, temperature: f64) -> PyResult<()> {
+        println!("{}", temperature);
+        self.inner.t = temperature;
         Ok(())
     }
 
     #[getter]
-    fn get_tempreature(&self) -> PyResult<f64> {
+    fn get_temperature(&self) -> PyResult<f64> {
         Ok(self.inner.t)
+    }
+
+    // TODO: Proper error handling
+    fn calc_density(&mut self, flag: i32) {
+        self.inner.density(flag).unwrap();
     }
 }
 
