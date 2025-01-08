@@ -4,9 +4,9 @@ version = 4
 
 [[package]]
 name = "aga8"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "07564b9b505581b9bf1c1f70813bf3eda22a33b517f20cd918804759300c2c22"
+checksum = "d22cb15b938282fb4d3672d9377d5426e097e6f3b647a638270cde5a68aededd"
 dependencies = [
  "cbindgen",
  "winres",
@@ -43,9 +43,9 @@ checksum = "b048fb63fd8b5923fc5aa7b340d8e156aec7ec02f0c78fa8a6ddc2613f6f71de"
 
 [[package]]
 name = "cbindgen"
-version = "0.24.5"
+version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b922faaf31122819ec80c4047cc684c6979a087366c069611e33649bf98e18d"
+checksum = "da6bc11b07529f16944307272d5bd9b22530bc7d05751717c9d416586cedab49"
 dependencies = [
  "clap",
  "heck 0.4.1",
