@@ -15,6 +15,11 @@ impl Gerg2008 {
         }
     }
 
+    #[setter]
+    fn set_d(&mut self, d: f64) {
+        self.inner.d = d;
+    }
+
     #[getter]
     fn get_d(&self) -> f64 {
         self.inner.d

@@ -48,3 +48,10 @@ def test_gerg2008_set_temperature():
 
     with raises(TypeError):
         gerg.temperature = 'spam'
+
+def test_gerg2008_set_d():
+    gerg.d = 6.42
+    assert gerg.d == approx(6.42)
+
+    with raises(TypeError):
+        gerg.d = 'spam'
