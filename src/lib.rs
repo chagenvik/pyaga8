@@ -15,6 +15,11 @@ impl Gerg2008 {
         }
     }
 
+    #[getter]
+    fn get_d(&self) -> f64 {
+        self.inner.d
+    }
+
     #[setter]
     fn set_pressure(&mut self, pressure: f64) -> PyResult<()> {
         println!("{}", pressure);
