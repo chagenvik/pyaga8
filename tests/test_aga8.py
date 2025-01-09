@@ -1,7 +1,7 @@
 import pyaga8
 
 
-def gerg2008_calc_density():
+def test_gerg2008_calc_density():
     composition = pyaga8.Composition()
     composition.methane = 0.778_24
     composition.nitrogen = 0.02
