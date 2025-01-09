@@ -27,6 +27,18 @@ FULL_COMPOSITION.hydrogen_sulfide = 0.002_5
 FULL_COMPOSITION.helium = 0.007
 FULL_COMPOSITION.argon = 0.001
 
+def test_gerg2008_set_composition():
+    gerg.set_composition(FULL_COMPOSITION)
+
+    # TODO: Map Rust Errors Empty and BadSum to python Exceptions
+    invalid = pyaga8.Composition()
+    with raises(BaseException):
+        gerg.set_composition(invalid)
+
+    invalid.ethane = 0.3
+    with raises(BaseException):
+        gerg.set_composition(invalid)
+
 def test_gerg2008_calc_density():
     gerg.set_composition(FULL_COMPOSITION)
     gerg.temperature = 400.0
