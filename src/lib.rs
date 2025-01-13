@@ -15,16 +15,7 @@ impl Gerg2008 {
         }
     }
 
-    #[setter]
-    fn set_d(&mut self, d: f64) {
-        self.inner.d = d;
-    }
-
-    #[getter]
-    fn get_d(&self) -> f64 {
-        self.inner.d
-    }
-
+    // Properties
     #[setter]
     fn set_pressure(&mut self, pressure: f64) -> PyResult<()> {
         println!("{}", pressure);
@@ -49,9 +40,107 @@ impl Gerg2008 {
         Ok(self.inner.t)
     }
 
+    #[setter]
+    fn set_d(&mut self, d: f64) {
+        self.inner.d = d;
+    }
+
+    #[getter]
+    fn get_d(&self) -> f64 {
+        self.inner.d
+    }
+
+    #[getter]
+    fn get_z(&self) -> f64 {
+        self.inner.z
+    }
+
+    #[getter]
+    fn get_mm(&self) -> f64 {
+        self.inner.mm
+    }
+
+    #[getter]
+    fn get_dp_dd(&self) -> f64 {
+        self.inner.dp_dd
+    }
+
+    #[getter]
+    fn get_d2p_dd2(&self) -> f64 {
+        self.inner.d2p_dd2
+    }
+
+    #[getter]
+    fn get_d2p_dtd(&self) -> f64 {
+        self.inner.d2p_dtd
+    }
+
+    #[getter]
+    fn get_dp_dt(&self) -> f64 {
+        self.inner.dp_dt
+    }
+
+    #[getter]
+    fn get_u(&self) -> f64 {
+        self.inner.u
+    }
+
+    #[getter]
+    fn get_h(&self) -> f64 {
+        self.inner.h
+    }
+
+    #[getter]
+    fn get_s(&self) -> f64 {
+        self.inner.s
+    }
+
+    #[getter]
+    fn get_cv(&self) -> f64 {
+        self.inner.cv
+    }
+
+    #[getter]
+    fn get_cp(&self) -> f64 {
+        self.inner.cp
+    }
+
+    #[getter]
+    fn get_w(&self) -> f64 {
+        self.inner.w
+    }
+
+    #[getter]
+    fn get_g(&self) -> f64 {
+        self.inner.g
+    }
+
+    #[getter]
+    fn get_jt(&self) -> f64 {
+        self.inner.jt
+    }
+
+    #[getter]
+    fn get_kappa(&self) -> f64 {
+        self.inner.kappa
+    }
+
+    // Functions
     // TODO: Proper error handling
     fn calc_density(&mut self, flag: i32) {
         self.inner.density(flag).unwrap();
+    }
+
+    fn calc_pressure(&mut self) -> f64 {
+        self.inner.pressure()
+    }
+
+    fn calc_properties(&mut self) {
+        self.inner.properties();
+    }
+
+    fn calc_molar_mass(&mut self) {
+        self.inner.molar_mass();
     }
 
     fn set_composition(&mut self, comp: &Composition) {
