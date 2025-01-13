@@ -3,6 +3,7 @@ from pytest import approx, raises
 
 
 gerg = pyaga8.Gerg2008()
+detail = pyaga8.Detail()
 
 FULL_COMPOSITION = pyaga8.Composition()
 FULL_COMPOSITION.methane = 0.778_24
@@ -104,3 +105,82 @@ def test_gerg2008_set_d():
 
     with raises(TypeError):
         gerg.d = 'spam'
+
+
+def test_detail_set_composition():
+    detail.set_composition(FULL_COMPOSITION)
+
+    # TODO: Map Rust Errors Empty and BadSum to python Exceptions
+    invalid = pyaga8.Composition()
+    with raises(BaseException):
+        detail.set_composition(invalid)
+
+    invalid.ethane = 0.3
+    with raises(BaseException):
+        detail.set_composition(invalid)
+
+def test_detail2008_calc_density():
+    detail.set_composition(FULL_COMPOSITION)
+    detail.temperature = 400.0
+    detail.pressure = 50_000.0
+
+    detail.calc_density()
+    assert detail.d == approx(12.807_924_036_488_01)
+
+def test_detail2008_calc_pressure():
+    detail.set_composition(FULL_COMPOSITION)
+    detail.temperature = 18.0 + 273.15
+    detail.d = 7.558_334
+
+    assert detail.calc_pressure() == approx(13_067.068_161_509_907)
+
+def test_detail2008_calc_properties():
+    detail.set_composition(FULL_COMPOSITION)
+    detail.temperature = 400.0
+    detail.pressure = 50_000.0
+
+    detail.calc_density()
+    detail.calc_properties()
+
+    assert detail.d == approx(12.807_924_036_488_01)
+    assert detail.mm == approx(20.543_330_51)
+    assert detail.z == approx(1.173_801_364_147_326)
+    assert detail.dp_dd == approx(6_971.387_690_924_09)
+    assert detail.d2p_dd2 == approx(1_118.803_636_639_52)
+    assert detail.dp_dt == approx(235.664_149_306_821_2)
+    assert detail.u == approx(-2_739.134_175_817_231)
+    assert detail.h == approx(1_164.699_096_269_404)
+    assert detail.s == approx(-38.548_826_846_771_11)
+    assert detail.cv == approx(39.120_761_544_303_32)
+    assert detail.cp == approx(58.546_176_723_806_67)
+    assert detail.w == approx(712.639_368_405_790_3)
+    assert detail.g == approx(16_584.229_834_977_85)
+    assert detail.jt == approx(7.432_969_304_794_577E-5)
+    assert detail.kappa == approx(2.672_509_225_184_606)
+
+def test_detail2008_calc_molar_mass():
+    detail.set_composition(FULL_COMPOSITION)
+    detail.calc_molar_mass()
+
+    assert detail.mm == approx(20.543_330_51)
+
+def test_detail2008_set_pressure():
+    detail.pressure = 42.14
+    assert detail.pressure == approx(42.14)
+
+    with raises(TypeError):
+        detail.pressure = 'spam'
+
+def test_detail2008_set_temperature():
+    detail.temperature = 42.14
+    assert detail.temperature == approx(42.14)
+
+    with raises(TypeError):
+        detail.temperature = 'spam'
+
+def test_detail2008_set_d():
+    detail.d = 6.42
+    assert detail.d == approx(6.42)
+
+    with raises(TypeError):
+        detail.d = 'spam'
