@@ -11,5 +11,17 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version"]
+
+# Additional metadata
+homepage = "https://github.com/chagenvik/pyaga8"
+authors = [
+    { name = "Roy Vegard Ovesen" },
+    { name = "Christian Hågenvik" }
+]
+license = { text = "MIT License" }
+keywords = ["AGA8", "gas properties", "GERG-2008", "DETAIL"]
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
+long_description = "README.md"
+long_description_content_type = "text/markdown"
