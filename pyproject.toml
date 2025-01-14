@@ -4,6 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "pyaga8"
+summary = "Python package for calculating gas properties using the AGA8 equations GERG-2008 and DETAIL"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Rust",
