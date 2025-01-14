@@ -18,7 +18,6 @@ impl Gerg2008 {
     // Properties
     #[setter]
     fn set_pressure(&mut self, pressure: f64) -> PyResult<()> {
-        println!("{}", pressure);
         self.inner.p = pressure;
         Ok(())
     }
@@ -30,7 +29,6 @@ impl Gerg2008 {
 
     #[setter]
     fn set_temperature(&mut self, temperature: f64) -> PyResult<()> {
-        println!("{}", temperature);
         self.inner.t = temperature;
         Ok(())
     }
@@ -165,7 +163,6 @@ impl Detail {
     // Properties
     #[setter]
     fn set_pressure(&mut self, pressure: f64) -> PyResult<()> {
-        println!("{}", pressure);
         self.inner.p = pressure;
         Ok(())
     }
@@ -177,7 +174,6 @@ impl Detail {
 
     #[setter]
     fn set_temperature(&mut self, temperature: f64) -> PyResult<()> {
-        println!("{}", temperature);
         self.inner.t = temperature;
         Ok(())
     }
