@@ -25,11 +25,15 @@ jobs:
       run: pip install maturin
     - name: Build the package
       run: maturin build --release
-    - name: Upload Python package
+    - name: Create source distribution
+      run: maturin sdist
+    - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: dist
-        path: target/wheels/*.whl
+        path: |
+          target/wheels/*.whl
+          target/wheels/*.tar.gz
     - name: Publish to PyPI
       if: github.event_name == 'release'
       env:
@@ -37,4 +41,4 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         pip install twine
-        twine upload target/wheels/*.whl
+        twine upload target/wheels/*.whl target/wheels/*.tar.gz
