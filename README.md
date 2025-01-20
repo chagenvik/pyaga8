@@ -1,5 +1,5 @@
 # pyaga8
-Python package for calculating gas properties using the AGA8 equations GERG-2008 and DETAIL, utilizing the Rust port of NIST's AGA8 code (https://crates.io/crates/aga8).
+Python package for calculating gas properties using the AGA8 equations GERG-2008 and DETAIL, utilizing the Rust port ((https://crates.io/crates/aga8) of NIST's AGA8 code (https://github.com/usnistgov/AGA8).
 
 Link to Github repo: https://github.com/chagenvik/pyaga8
 
