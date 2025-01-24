@@ -23,7 +23,7 @@ license = { text = "MIT License" }
 keywords = ["AGA8", "gas properties", "GERG-2008", "DETAIL"]
 
 [project.urls]
-homepage = "https://github.com/chagenvik/pyaga8"
+homepage = "https://github.com/equinor/pyaga8"
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
