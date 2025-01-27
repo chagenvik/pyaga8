@@ -19,7 +19,8 @@ authors = [
     { name = "Roy Vegard Ovesen" },
     { name = "Christian Hågenvik" }
 ]
-license = { text = "MIT License" }
+
+license = "MIT License"
 keywords = ["AGA8", "gas properties", "GERG-2008", "DETAIL"]
 
 [project.urls]
