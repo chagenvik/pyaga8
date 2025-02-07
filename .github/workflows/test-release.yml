@@ -1,9 +1,13 @@
-name: Release
+name: Test Release
+
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-  build-and-publish:
+  build-and-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -33,7 +37,7 @@ jobs:
 
   upload-source:
     runs-on: ubuntu-latest
-    needs: build-and-publish
+    needs: build-and-test
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -56,24 +60,24 @@ jobs:
         name: source-dist-${{ github.run_id }}
         path: target/wheels/*.tar.gz
 
-  publish:
+  test-publish:
     runs-on: ubuntu-latest
-    needs: [build-and-publish, upload-source]
+    needs: [build-and-test, upload-source]
     steps:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist
+        name: dist-${{ github.run_id }}
         path: dist
     - name: Download source distribution
       uses: actions/download-artifact@v4
       with:
-        name: source-dist
+        name: source-dist-${{ github.run_id }}
         path: dist
-    - name: Publish to PyPI
+    - name: Test publish to PyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         pip install twine==6.0.1
-        twine upload dist/*.whl dist/*.tar.gz
+        twine check dist/*.whl dist/*.tar.gz
