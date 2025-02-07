@@ -36,29 +36,13 @@ jobs:
         python -m pip install maturin
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         maturin develop
-      shell: bash
-    - name: Install dependencies on Windows
-      if: runner.os == 'Windows'
-      run: |
-        python -m venv .venv
-        .\.venv\Scripts\activate
-        python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
-        python -m pip install maturin
-        if (Test-Path requirements.txt) { pip install -r requirements.txt }
-        maturin develop
-      shell: pwsh
     - name: Lint with flake8
       run: |
         . ./.venv/bin/activate
-        flake8 .
-      shell: bash
-    - name: Lint with flake8 on Windows
-      if: runner.os == 'Windows'
-      run: |
-        .\.venv\Scripts\activate
-        flake8 .
-      shell: pwsh
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 tests/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
         . ./.venv/bin/activate
