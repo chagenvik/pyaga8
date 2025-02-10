@@ -30,7 +30,7 @@ jobs:
     - name: Build the package
       run: maturin build --release
     - name: Upload wheel artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist-${{ github.run_id }}
         path: target/wheels/*.whl
@@ -55,7 +55,7 @@ jobs:
     - name: Create source distribution
       run: maturin sdist
     - name: Upload source distribution
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: source-dist-${{ github.run_id }}
         path: target/wheels/*.tar.gz
@@ -65,12 +65,12 @@ jobs:
     needs: [build-and-test, upload-source]
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: dist-${{ github.run_id }}
         path: dist
     - name: Download source distribution
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: source-dist-${{ github.run_id }}
         path: dist
