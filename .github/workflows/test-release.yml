@@ -32,7 +32,7 @@ jobs:
     - name: Upload wheel artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: dist-${{ github.run_id }}
+        name: dist-${{ github.run_id }}-${{ matrix.os }}-${{ matrix.python-version }}
         path: target/wheels/*.whl
 
   upload-source:
@@ -57,7 +57,7 @@ jobs:
     - name: Upload source distribution
       uses: actions/upload-artifact@v4
       with:
-        name: source-dist-${{ github.run_id }}
+        name: source-dist-${{ github.run_id }}-${{ matrix.os }}-${{ matrix.python-version }}
         path: target/wheels/*.tar.gz
 
   test-publish:
@@ -67,12 +67,12 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist-${{ github.run_id }}
+        name: dist-${{ github.run_id }}-${{ matrix.os }}-${{ matrix.python-version }}
         path: dist
     - name: Download source distribution
       uses: actions/download-artifact@v4
       with:
-        name: source-dist-${{ github.run_id }}
+        name: source-dist-${{ github.run_id }}-${{ matrix.os }}-${{ matrix.python-version }}
         path: dist
     - name: Test publish to PyPI
       env:
