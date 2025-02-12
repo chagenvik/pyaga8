@@ -11,8 +11,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        # python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.9", "3.10"]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -33,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist-${{ matrix.os }}-${{ matrix.python-version }}
-        path: target/wheels/*.whl
+        path: dist/*.whl
 
   upload-source:
     runs-on: ubuntu-latest
@@ -57,8 +59,8 @@ jobs:
     - name: Upload source distribution
       uses: actions/upload-artifact@v4
       with:
-        name: source-dist-ubuntu-latest-3.9
-        path: target/wheels/*.tar.gz
+        name: dist-source-ubuntu-latest-3.9
+        path: dist/*.tar.gz
 
   test-publish:
     runs-on: ubuntu-latest
@@ -67,13 +69,8 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist-${{ matrix.os }}-${{ matrix.python-version }}
-        path: target/wheels
-    - name: Download source distribution
-      uses: actions/download-artifact@v4
-      with:
-        name: source-dist-ubuntu-latest-3.9
-        path: target/wheels
+        pattern: dist-*
+        path: dist
     - name: Test publish to PyPI
       env:
         TWINE_USERNAME: __token__
