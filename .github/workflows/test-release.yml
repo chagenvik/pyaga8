@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist-${{ matrix.os }}-${{ matrix.python-version }}
-        path: dist/*.whl
+        path: target/wheels/*.whl
 
   upload-source:
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist-source-ubuntu-latest-3.9
-        path: dist/*.tar.gz
+        path: target/wheels/*.tar.gz
 
   test-publish:
     runs-on: ubuntu-latest
