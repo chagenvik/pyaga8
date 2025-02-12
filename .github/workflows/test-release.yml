@@ -1,13 +1,17 @@
-name: Release
+name: Test Release
+
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
   build-and-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-22.04, ubuntu-20.04, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
     - name: Checkout repository
@@ -65,12 +69,11 @@ jobs:
       with:
         pattern: dist-*
         path: dist
-
-    - name: Publish to PyPI
+    - name: Test publish to PyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         pip install twine==6.0.1
         ls -R -l *
-        twine upload dist/dist-*/*.whl dist/dist-*/*.tar.gz
+        twine check dist/dist-*/*.whl dist/dist-*/*.tar.gz
