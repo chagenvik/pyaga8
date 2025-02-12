@@ -1,6 +1,6 @@
 [package]
 name = "pyaga8"
-version = "0.1.13"
+version = "0.1.14"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -10,4 +10,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = "0.23.3"
-aga8 = "0.5.0"
+aga8 = "0.5"
